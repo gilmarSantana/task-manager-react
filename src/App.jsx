@@ -52,7 +52,7 @@ function App() {
 
   function onAddTaskClick(title, description) {
     let newTask = {
-      id: v4,
+      id: v4(),
       title,
       description,
       isCompleted: false,
