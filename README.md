@@ -64,7 +64,6 @@ Outros scripts: `npm run build` (build de produção), `npm run preview` (visual
 
 Pontos que ficaram em aberto e são boas oportunidades de estudo:
 
-- Em `onAddTaskClick`, o `id` recebe `v4` em vez de `v4()`, ou seja, a função em vez de um UUID. Todas as tarefas novas acabam com o mesmo `id`, o que quebra a marcação como concluída, a exclusão e o uso de `key`.
 - Ao concluir uma tarefa, a data é calculada na renderização do `App`, então pode ficar defasada. O ideal é gerar a data dentro do handler.
 - As tarefas ficam só em memória e se perdem ao recarregar a página. Próximo passo: persistir com `localStorage` (`useEffect`) ou uma API.
 - A página de detalhes lê título e descrição da URL. Uma alternativa é buscar a tarefa por `id` (rota `/task/:id`).
