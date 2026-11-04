@@ -1,23 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Tasks from "./components/Tasks";
 import AddTasks from "./components/AddTasks";
 import { v4 } from "uuid";
 
 function App() {
-  const [tasks, setTasks] = useState([
-    {
-      id: v4(),
-      title: "Estudar Python",
-      description: "Estudar Python focado em análise de dados",
-      isCompleted: false,
-    },
-    {
-      id: v4(),
-      title: "Fazer atividade da faculdade",
-      description: "Responder questionário das disciplinas",
-      isCompleted: false,
-    },
-  ]);
+  const [tasks, setTasks] = useState(JSON.parse(localStorage.getItem("tasks")) || []);
+
+  // O useEffect é um hook que executa uma função quando o valor do segundo parametro é alterado. No nosso caso, o segundo parametro é o array tasks que é um state que armazena as tarefas.
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
 
   const agora = new Date();
   const dataHoraFormatada = agora.toLocaleString("pt-BR");
