@@ -1,6 +1,5 @@
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { ChevronLeftIcon } from "lucide-react";
-import { PropTypes } from "prop-types";
 
 function TaskPage() {
   const [searchParams] = useSearchParams(); // hook
