@@ -1,5 +1,6 @@
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { ChevronLeftIcon } from "lucide-react";
+import { PropTypes } from "prop-types";
 
 function TaskPage() {
   const [searchParams] = useSearchParams(); // hook
@@ -7,6 +8,7 @@ function TaskPage() {
 
   const title = searchParams.get("title");
   const description = searchParams.get("description");
+
   return (
     <div className="w-screen h-screen bg-slate-500 flex justify-center p-6 ">
       <div className="w-[500px] space-y-4">
@@ -30,5 +32,6 @@ function TaskPage() {
     </div>
   );
 }
+
 
 export default TaskPage;
