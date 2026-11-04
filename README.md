@@ -4,7 +4,8 @@ Projeto de **estudo** para praticar os fundamentos do React construindo um geren
 
 ## Funcionalidades
 
-- Listar tarefas (a lista começa com duas tarefas de exemplo).
+- Listar tarefas (a lista começa vazia na primeira visita).
+- **Persistência no navegador:** as tarefas são salvas no `localStorage` e continuam lá depois de recarregar a página ou fechar o navegador.
 - Adicionar uma tarefa com título e descrição (com validação de campos vazios).
 - Marcar uma tarefa como concluída, registrando a data e a hora da conclusão.
 - Excluir tarefas (tarefas já concluídas não podem ser excluídas).
@@ -21,6 +22,9 @@ Projeto de **estudo** para praticar os fundamentos do React construindo um geren
 | Renderização de listas com `map` e `key` | `Tasks.jsx` |
 | Renderização condicional | Estilo e texto de tarefa concluída em `Tasks.jsx` |
 | Atualização imutável de estado (`map`, `filter`, spread) | `App.jsx` |
+| Efeitos colaterais com `useEffect` e array de dependências | `App.jsx` (salva as tarefas sempre que `tasks` muda) |
+| `localStorage` com `getItem`/`setItem` | `App.jsx` |
+| Serialização com `JSON.stringify` / `JSON.parse` | `App.jsx` (o `localStorage` só guarda strings) |
 | Roteamento com React Router (`createBrowserRouter`, `RouterProvider`) | `main.jsx` |
 | Hooks do router: `useNavigate` e `useSearchParams` | `Tasks.jsx`, `TaskPage.jsx` |
 | Passagem de dados entre páginas via query string | `/task?title=...&description=...` |
@@ -65,6 +69,8 @@ Outros scripts: `npm run build` (build de produção), `npm run preview` (visual
 Pontos que ficaram em aberto e são boas oportunidades de estudo:
 
 - Ao concluir uma tarefa, a data é calculada na renderização do `App`, então pode ficar defasada. O ideal é gerar a data dentro do handler.
-- As tarefas ficam só em memória e se perdem ao recarregar a página. Próximo passo: persistir com `localStorage` (`useEffect`) ou uma API.
+- O `useState(JSON.parse(localStorage.getItem("tasks")) || [])` lê o `localStorage` a cada renderização. O ideal é usar a inicialização preguiçosa (`useState(() => ...)`), que lê só na primeira vez.
+- Se o JSON salvo estiver corrompido, o `JSON.parse` lança erro e quebra o app. Vale tratar com `try/catch`.
+- Os dados ficam apenas no navegador do usuário. Para compartilhar entre dispositivos, o próximo passo seria uma API ou um backend.
 - A página de detalhes lê título e descrição da URL. Uma alternativa é buscar a tarefa por `id` (rota `/task/:id`).
 - Possíveis evoluções: editar tarefas, filtros (pendentes/concluídas), testes e `PropTypes` ou TypeScript.
