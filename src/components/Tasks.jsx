@@ -1,17 +1,7 @@
-import { ChevronRightIcon, Check, Trash } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { ChevronRightIcon, Trash } from "lucide-react";
+import { PropTypes } from "prop-types";
 
-function Tasks({ tasks, onDeleteTaskClick, onTaskClick }) {
-  const navigate = useNavigate(); // hook
-
-  function onSeeDetailsClick(task) {
-    const query = new URLSearchParams(); //from hook
-    console.log(query);
-    query.set("title", task.title);
-    query.set("description", task.description);
-
-    navigate(`/task?${query.toString()}`);
-  }
+function Tasks({ tasks, onDeleteTaskClick, onTaskClick, onSeeDetailsClick }) {
 
   return (
     <ul className="space-y-4 p-6 bg-slate-200 rounded-md shadow">
@@ -50,4 +40,11 @@ function Tasks({ tasks, onDeleteTaskClick, onTaskClick }) {
   );
 }
 
+// PropTypes é uma biblioteca que ajuda a validar os props que são passados para o componente.
+Tasks.propTypes = {
+  tasks: PropTypes.array.isRequired,
+  onDeleteTaskClick: PropTypes.func.isRequired,
+  onTaskClick: PropTypes.func.isRequired,
+  onSeeDetailsClick: PropTypes.func.isRequired,
+}
 export default Tasks;

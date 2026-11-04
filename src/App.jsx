@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Tasks from "./components/Tasks";
 import AddTasks from "./components/AddTasks";
 import { v4 } from "uuid";
@@ -13,6 +14,7 @@ function App() {
 
   const agora = new Date();
   const dataHoraFormatada = agora.toLocaleString("pt-BR");
+  const navigate = useNavigate(); // hook
 
   function onTaskClick(taskId) {
     const newTasks = tasks.map((task) => {
@@ -53,6 +55,14 @@ function App() {
     setTasks([...tasks, newTask]);
     return true;
   }
+  function onSeeDetailsClick(task) {
+    const query = new URLSearchParams(); //from hook
+    console.log(query);
+    query.set("title", task.title);
+    query.set("description", task.description);
+
+    navigate(`/task?${query.toString()}`);
+  }
 
   return (
     <div className="w-screen h-screen bg-slate-500 flex justify-center p-6 ">
@@ -65,6 +75,7 @@ function App() {
           tasks={tasks}
           onTaskClick={onTaskClick}
           onDeleteTaskClick={onDeleteTaskClick}
+          onSeeDetailsClick={onSeeDetailsClick}
         />
       </div>
     </div>

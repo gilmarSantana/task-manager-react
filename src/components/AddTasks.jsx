@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { PropTypes } from "prop-types";
 
 function AddTasks({ onAddTaskClick }) {
   let [title, setTitle] = useState("");
@@ -45,5 +46,10 @@ function AddTasks({ onAddTaskClick }) {
     </div>
   );
 }
+
+// PropTypes é uma biblioteca que ajuda a validar os props que são passados para o componente.
+AddTasks.propTypes = {
+  onAddTaskClick: PropTypes.func.isRequired,
+};
 
 export default AddTasks;
